@@ -1,6 +1,10 @@
 package com.aosgi.framework;
 
 import android.app.Application;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 
 import com.aosgi.framework.utils.PackageUtils;
@@ -66,4 +70,19 @@ public abstract class ApplicationContext extends Application {
 		return PackageUtils.getMetaData(this);
 	}
 
+	/**
+	 * Test whether the application is debuggable or not
+	 * 
+	 * @return {@code true} if the application is debuggable 
+	 */
+	public boolean isDebuggable() {
+		final PackageManager pm = getPackageManager();
+
+		try {
+			final PackageInfo pi = pm.getPackageInfo(getPackageName(), 0);
+			return ((pi.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0);
+		} catch (NameNotFoundException e) {
+			return false;
+		}
+	}
 }
