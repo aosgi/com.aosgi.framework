@@ -6,6 +6,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+import com.aosgi.framework.log.Logger;
+import com.aosgi.framework.log.LoggerFactory;
+
 /**
  * A delegate of {@link UncaughtExceptionHandler}
  * 
@@ -13,6 +16,8 @@ import java.lang.reflect.Proxy;
  * 
  */
 public class DelegatedUncaughtExceptionHandler implements UncaughtExceptionHandler {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger("DelegatedUncaughtExceptionHandler");
 
 	private final UncaughtExceptionHandler delegate;
 
@@ -50,6 +55,8 @@ public class DelegatedUncaughtExceptionHandler implements UncaughtExceptionHandl
 
 	@Override
 	public void uncaughtException(final Thread thread, final Throwable t) {
+		LOGGER.error("Uncaught Exception", t);
+
 		if (null == this.delegate)
 			return;
 
