@@ -40,7 +40,7 @@ public abstract class ApplicationContext extends Application {
 		super.onCreate();
 
 		// set default uncaught exception handler
-		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandlerDelegate());
+		Thread.setDefaultUncaughtExceptionHandler(new DelegatedUncaughtExceptionHandler());
 	}
 
 	/**
