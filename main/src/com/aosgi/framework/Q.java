@@ -16,7 +16,7 @@ import android.widget.Toast;
  */
 public final class Q {
 
-	private static final Map<String, Integer> cache = new HashMap<String, Integer>();
+	private static final Map<String, Integer> CACHE = new HashMap<String, Integer>();
 
 	/**
 	 * Lookup the specified resource from {@link R.anim}
@@ -254,15 +254,15 @@ public final class Q {
 		final String resType = packageName + ".R$" + res;
 		final String resName = resType + "." + name;
 
-		if (Q.cache.containsKey(resName)) {
-			return Q.cache.get(resName);
+		if (Q.CACHE.containsKey(resName)) {
+			return Q.CACHE.get(resName);
 		}
 
 		try {
 			final Class<?> clazz = Class.forName(resType);
 			final Field field = clazz.getDeclaredField(name);
 			final int resId = field.getInt(clazz);
-			Q.cache.put(resName, Integer.valueOf(resId));
+			Q.CACHE.put(resName, Integer.valueOf(resId));
 			return resId;
 		} catch (Throwable t) {
 			if (app.isDebuggable()) {
