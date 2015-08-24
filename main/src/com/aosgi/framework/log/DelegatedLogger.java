@@ -1,5 +1,7 @@
 package com.aosgi.framework.log;
 
+import org.slf4j.helpers.MessageFormatter;
+
 class DelegatedLogger implements Logger {
 
 	private final org.slf4j.Logger delegate;
@@ -49,7 +51,7 @@ class DelegatedLogger implements Logger {
 
 	@Override
 	public void trace(String msg, Object... args) {
-		this.delegate.trace(String.format(msg, args));
+		this.delegate.trace(MessageFormatter.format(msg, args).getMessage());
 	}
 
 	@Override
@@ -59,7 +61,7 @@ class DelegatedLogger implements Logger {
 
 	@Override
 	public void debug(String msg, Object... args) {
-		this.delegate.debug(String.format(msg, args));
+		this.delegate.debug(MessageFormatter.format(msg, args).getMessage());
 	}
 
 	@Override
@@ -69,7 +71,7 @@ class DelegatedLogger implements Logger {
 
 	@Override
 	public void info(String msg, Object... args) {
-		this.delegate.info(String.format(msg, args));
+		this.delegate.info(MessageFormatter.format(msg, args).getMessage());
 	}
 
 	@Override
@@ -79,7 +81,7 @@ class DelegatedLogger implements Logger {
 
 	@Override
 	public void warn(String msg, Object... args) {
-		this.delegate.warn(String.format(msg, args));
+		this.delegate.warn(MessageFormatter.format(msg, args).getMessage());
 	}
 
 	@Override
@@ -89,7 +91,7 @@ class DelegatedLogger implements Logger {
 
 	@Override
 	public void error(String msg, Object... args) {
-		this.delegate.error(String.format(msg, args));
+		this.delegate.error(MessageFormatter.format(msg, args).getMessage());
 	}
 
 }
